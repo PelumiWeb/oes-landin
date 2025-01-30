@@ -14,6 +14,23 @@
   }
 }
 
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+@layer base {
+
+  h3 {
+    @apply font-medium text-[52px] leading-[62px] text-[#002B6B]  font-marope
+  }
+ 
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
