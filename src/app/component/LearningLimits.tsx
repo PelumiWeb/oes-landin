@@ -18,7 +18,7 @@ const LearningLimits = (props: Props) => {
   };
 
   return (
-    <div className="pl-32 py-16">
+    <div className="pl-32 py-16 bg-white">
       <div className="flex items-center justify-between w-full">
         <h3 className="text-[#1E242C]">Learning Without Limits</h3>
 

@@ -94,7 +94,7 @@ const FaqComponent = (props: FaqComponentProps) => {
 
 const Faq = (props: Props) => {
   return (
-    <div className="px-32 py-16">
+    <div className="px-32 py-16 bg-white">
       <h3 className="text-[#1E242C] my-4">Frequently asked Questions</h3>
 
       <div className="grid grid-cols-3 lg:grid-cols-2 gap-y-4 h-full">

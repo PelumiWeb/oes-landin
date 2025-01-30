@@ -24,7 +24,7 @@ const ConnectComponent = (props: ConnectProps) => {
 
 const ConnectOES = (props: Props) => {
   return (
-    <div className="py-16 px-32 flex items-start justify-between">
+    <div className="py-16 px-32 flex items-start justify-between bg-white">
       <div className="w-full">
         <h3 className="text-[#1E242C]  ">Connect with OES</h3>
         <div>

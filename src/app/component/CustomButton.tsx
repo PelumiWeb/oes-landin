@@ -7,7 +7,7 @@ import { OrbitProgress } from "react-loading-indicators";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
 type Props = {
-  title: string;
+  title: string | undefined;
   loading?: boolean;
   IconLeft?: string;
   textColor?: string;
