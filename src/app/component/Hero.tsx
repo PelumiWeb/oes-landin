@@ -9,9 +9,9 @@ const Hero = (props: Props) => {
   return (
     <div className="bg-hero-Image bg-cover bg-no-repeat w-full h-full">
       <Header />
-      <div className="flex items-start w-full px-4 md:px-32 py-2 md:py-8 flex-col md:flex-row">
+      <div className="flex items-start justify-center w-full px-4 md:px-32 py-2 md:py-8 flex-col md:flex-row">
         <div className="w-full flex justify-center items-center flex-col md:block md:w-[45%]">
-          <div className="bg-white rounded-[24px] h-[30px] w-[300px] flex items-center justify-center ">
+          <div className="bg-white rounded-[24px] h-[30px] w-[300px] flex items-center justify-center py-4">
             <div className="relative w-[24px] h-[24px] ">
               <Image src={"jobLink.svg"} alt="" fill />
             </div>

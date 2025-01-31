@@ -26,7 +26,7 @@ const UserComment = (props: Props) => {
   return (
     <div className="px-32 py-16 bg-[#FAFAFA]">
       <h3 className="text-[#1E242C] py-4 ">What our users say</h3>
-      <div className="flex items-start ">
+      <div className="flex items-start justify-center ">
         <div className="w-[600px] h-[400px] bg-[#1E242C] rounded-[20px] px-8 py-4">
           <div
             ref={scrollRef}

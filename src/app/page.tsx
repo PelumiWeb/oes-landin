@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Hero from "./component/Hero";
 import Study from "./component/Study";
