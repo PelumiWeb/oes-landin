@@ -1,17 +1,20 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import CustomButton from "./CustomButton";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
 const Header = (props: Props) => {
+  const router = useRouter();
   return (
     <div className="flex items-center  justify-between w-full px-16 py-8">
       <div className="relative w-[100px] h-[100px]">
         <Image src={"/logosOES.svg"} fill alt="" />
       </div>
 
-      <div className="flex items-center justify-between w-[50%]">
+      <div className="hidden md:flex items-center justify-between w-[50%] ">
         <button>
           <p className="text-[#272F3A] font-marope text-[16px] leading-[24px] font-semibold">
             Home
@@ -22,9 +25,9 @@ const Header = (props: Props) => {
             About
           </p>
         </button>
-        <button>
+        <button onClick={() => router.push("/tutor")}>
           <p className="text-[#272F3A] font-marope text-[16px] leading-[24px] font-semibold">
-            OES Features
+            OES Tutor
           </p>
         </button>
         <button>
@@ -41,7 +44,7 @@ const Header = (props: Props) => {
 
       <div>
         <CustomButton
-        padding="pl-4"
+          padding="pl-4"
           title="Register Now"
           iconRight="/iconRightButtonHeader.svg"
           radius="rounded-[24px] rounded-l-[24px]"

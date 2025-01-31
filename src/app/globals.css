@@ -24,11 +24,9 @@
 }
 
 @layer base {
-
   h3 {
-    @apply font-medium text-[52px] leading-[62px] text-[#002B6B]  font-marope
+    @apply font-medium text-[30px] leading-[42px] md:text-[52px]  md:leading-[62px] text-[#002B6B]   font-marope;
   }
- 
 }
 
 body {

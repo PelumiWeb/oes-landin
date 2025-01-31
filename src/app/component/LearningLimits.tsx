@@ -18,9 +18,9 @@ const LearningLimits = (props: Props) => {
   };
 
   return (
-    <div className="pl-32 py-16">
-      <div className="flex items-center justify-between w-full">
-        <h3 className="text-[#1E242C]">Learning Without Limits</h3>
+    <div className=" lg:pl-32 py-4 lg:py-16 bg-white">
+      <div className="flex items-center justify-between w-full mr-4">
+        <h3 className="text-[#1E242C] ml-4">Learning Without Limits</h3>
 
         <div className="w-[12%] flex justify-between items-center">
           <button

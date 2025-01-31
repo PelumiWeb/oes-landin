@@ -18,7 +18,7 @@ const Paragraph = (props: { bold?: boolean; text: string }) => {
 
 const Footer = (props: Props) => {
   return (
-    <div className="h-[400px] w-full px-32 py-16 bg-footer-bg bg-bottom bg-no-repeat">
+    <div className="h-[400px]  px-32 py-16 bg-footer-bg bg-bottom bg-no-repeat w-full">
       <div className="flex items-start justify-between">
         <div>
           <div className="relative w-[90px] h-[90px] ">

@@ -6,15 +6,15 @@ type ConnectProps = { image: string; text: string; title: string };
 
 const ConnectComponent = (props: ConnectProps) => {
   return (
-    <div className="w-[457px] h-[h-[130px] shadow-connect-shadow flex items-center rounded-[20px] justify-between p-2">
+    <div className="w-[350px] lg:w-[457px] h-[100px] shadow-connect-shadow flex items-center rounded-[20px] justify-between p-2">
       <div className="relative w-[56px] h-[56px]">
         <Image src={props.image} alt="" fill />
       </div>
       <div className=" w-[80%]">
-        <p className="text-[#1E242C] text-[24px] font-medium leading-[28px]  font-marope">
+        <p className="text-[#1E242C]  text-[16px] md:text-[20px] lg:text-[24px] font-medium leading-[28px]  font-marope">
           {props.title}
         </p>
-        <p className="text-[#414D60] text-[18px] font-medium leading-[24px]  font-marope">
+        <p className="text-[#414D60] text-[15px]  lg:text-[18px] font-medium leading-[24px]  font-marope">
           {props.text}
         </p>
       </div>
@@ -24,11 +24,13 @@ const ConnectComponent = (props: ConnectProps) => {
 
 const ConnectOES = (props: Props) => {
   return (
-    <div className="py-16 px-32 flex items-start justify-between">
+    <div className="py-8 lg:py-16 px-16 lg:px-32 flex items-center justify-center lg:justify-between bg-white  flex-col md:flex-row w-full">
       <div className="w-full">
-        <h3 className="text-[#1E242C]  ">Connect with OES</h3>
-        <div>
-          <div className="flex items-center">
+        <h3 className="text-[#1E242C] text-center md:text-left ">
+          Connect with OES
+        </h3>
+        <div className="my-8 md:my-0">
+          <div className="flex items-center w-full justify-center my-2">
             <p className="font-marope text-[108px]  text-[#002B6B] leading-[130px] font-medium">
               01
             </p>
@@ -39,7 +41,7 @@ const ConnectOES = (props: Props) => {
               image={"/connect1.svg"}
             />
           </div>
-          <div className="flex items-center">
+          <div className="flex  items-center w-full justify-center">
             <ConnectComponent
               text="Access tailored resources and stay connected with your educational Journey"
               title="Connect as Student/ Parent"
@@ -49,7 +51,7 @@ const ConnectOES = (props: Props) => {
               02
             </p>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center w-full justify-center my-2">
             <p className="font-marope text-[108px]  text-[#002B6B] leading-[130px] font-medium">
               03
             </p>
@@ -62,7 +64,7 @@ const ConnectOES = (props: Props) => {
         </div>
       </div>
 
-      <div className="h-full flex w-full">
+      <div className="h-full flex w-full lg:ml-8">
         <div className="">
           {/* Image */}
           <div className="relative w-[215px] h-[300px]">

@@ -5,7 +5,7 @@ type Props = {};
 
 const TrustedComponent = (props: Props) => {
   return (
-    <div className="h-[450px] bg-[#FAFAFA] py-[88px] px-[300px]">
+    <div className="h-[450px] bg-[#FAFAFA] py-[88px] px-32">
       <h3 className=" text-[#1E242C] text-center ">
         Trusted by incredible Organizations
       </h3>
@@ -18,7 +18,7 @@ const TrustedComponent = (props: Props) => {
         <img src="/currencyLogo2.svg" alt="" />
         <img src="/currencyLogo3.svg" alt="" />
         <img src="/currencyLogo4.svg" alt="" />
-        {/* <img src="/currencyLogo5.svg" className="w-[150px]" alt="" /> */}
+        {/* <img src="/currencyLogo5.svg" alt="" /> */}
       </div>
     </div>
   );
