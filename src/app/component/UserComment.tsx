@@ -24,10 +24,10 @@ const UserComment = (props: Props) => {
     }
   };
   return (
-    <div className="px-32 py-16 bg-[#FAFAFA]">
-      <h3 className="text-[#1E242C] py-4 ">What our users say</h3>
+    <div className="px-8 md:px-16 pt-4  md:py-8 lg:px-32 lg:py-16 bg-[#FAFAFA]">
+      <h3 className="text-[#1E242C] py-4 text-center ">What our users say</h3>
       <div className="flex items-start justify-center ">
-        <div className="w-[600px] h-[400px] bg-[#1E242C] rounded-[20px] px-8 py-4">
+        <div className="w-full lg:w-[600px] h-full lg:h-[400px] bg-[#1E242C] rounded-[20px] px-8 py-4">
           <div
             ref={scrollRef}
             className="flex items-start justify-start overflow-scroll w-full h-full scroll-smooth scrollbar-hide snap-x snap-mandatory">
@@ -36,16 +36,16 @@ const UserComment = (props: Props) => {
                 key={index}
                 className="flex flex-col justify-center items-center w-full flex-shrink-0 snap-center">
                 <div className="flex items-center justify-between w-[50%] f">
-                  <p className="font-marope font-semibold text-[20px] leading-[30px] text-white">
+                  <p className="font-marope font-semibold text-[14px] lg:text-[20px] leading-[20px] lg:leading-[30px] text-white">
                     Fredrick Ebuka
                   </p>
                   <div className="w-[5px] h-[5px] rounded-full bg-white" />
-                  <p className="font-marope font-semibold text-[16px] leading-[24px] text-[#AAB1BA]">
+                  <p className="font-marope font-semibold text-[14px] lg:text-[16px] leading-[20px] lg:leading-[24px] text-[#AAB1BA]">
                     Student
                   </p>
                 </div>
                 <div className="w-[90%] mt-8">
-                  <p className="font-marope text-[30px] text-center leading-[48px] font-medium text-white">
+                  <p className="font-marope text-[24px] lg:text-[30px] text-center leading-[38px] lg:leading-[48px] font-medium text-white">
                     “OES has been a game-changer for my studies. The Resources
                     are top-notch and the updates keep me on Track.”
                   </p>
