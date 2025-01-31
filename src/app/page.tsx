@@ -6,6 +6,7 @@ import ConnectOES from "./component/ConnectOES";
 import LearningLimits from "./component/LearningLimits";
 import UserComment from "./component/UserComment";
 import Faq from "./component/Faq";
+import Chat from "./component/Chat";
 
 export default function Home() {
   return (
