@@ -9,9 +9,9 @@ const Hero = (props: Props) => {
   return (
     <div className="bg-hero-Image bg-cover bg-no-repeat w-full h-full">
       <Header />
-      <div className="flex items-start w-full px-32 py-8 ">
-        <div className="w-[45%]">
-          <div className="bg-white rounded-[24px] h-[40px] w-[300px] flex items-center justify-center ">
+      <div className="flex items-start w-full px-4 md:px-32 py-2 md:py-8 flex-col md:flex-row">
+        <div className="w-full flex justify-center items-center flex-col md:block md:w-[45%]">
+          <div className="bg-white rounded-[24px] h-[30px] w-[300px] flex items-center justify-center ">
             <div className="relative w-[24px] h-[24px] ">
               <Image src={"jobLink.svg"} alt="" fill />
             </div>
@@ -20,7 +20,7 @@ const Hero = (props: Props) => {
             </p>
           </div>
           <div>
-            <h3 className="font-marope">Elevate Your Education with OES</h3>
+            <h3 className="font-marope ">Elevate Your Education with OES</h3>
             <p className="font-normal text-[18px] leading-[28px] text-[#414D60] font-marope">
               Join a community of learners and educators to enhance your skills.
               Powered by a public digital library of open Educational resources.
@@ -41,7 +41,7 @@ const Hero = (props: Props) => {
             </div>
           </div>
         </div>
-        <div className="w-[45%] -mt-[5%]">
+        <div className="w-full md:w-[45%] md:-mt-[5%]">
           <div className="relative w-[500px] h-[500px]">
             <Image src={"/heroImage.svg"} alt="" fill />
           </div>

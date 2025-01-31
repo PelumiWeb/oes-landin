@@ -1731,6 +1731,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/recorder-js@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "@types/recorder-js@npm:1.0.4"
+  checksum: f5d46303415a387b549735c9876192b07c70100728da51ac0aec3b5a5d84507e3291ab0e30c998517f0d58bdc0c56c75decce70f4de46690678236edaa3f9742
+  languageName: node
+  linkType: hard
+
 "@types/scheduler@npm:^0.16":
   version: 0.16.8
   resolution: "@types/scheduler@npm:0.16.8"
@@ -4254,6 +4261,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"inline-worker@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "inline-worker@npm:1.1.0"
+  checksum: 8cd6f7a7da2abec5be404e417916b6d858da0446c2db44ae973a45de6db5ba258178b27116921e66cb904a1f77e6f46e22fa84758f49b59f43c70d7428174c4a
+  languageName: node
+  linkType: hard
+
 "internal-slot@npm:^1.1.0":
   version: 1.1.0
   resolution: "internal-slot@npm:1.1.0"
@@ -5388,6 +5402,7 @@ __metadata:
     "@types/react": ^19
     "@types/react-copy-to-clipboard": ^5.0.7
     "@types/react-dom": ^19
+    "@types/recorder-js": ^1.0.4
     antd: ^5.21.6
     axios: ^1.7.9
     chart.js: ^4.4.7
@@ -5413,7 +5428,9 @@ __metadata:
     react-router-dom: ^6.28.0
     react-spinners: ^0.15.0
     react-toastify: ^11.0.2
+    react-type-animation: ^3.2.0
     recharts: ^2.13.3
+    recorder-js: ^1.0.7
     redux-persist: ^6.0.0
     tailwind-clip-path: ^1.0.0
     tailwindcss: ^3.4.1
@@ -6546,6 +6563,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-type-animation@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "react-type-animation@npm:3.2.0"
+  peerDependencies:
+    prop-types: ^15.5.4
+    react: ">= 15.0.0"
+    react-dom: ">= 15.0.0"
+  checksum: 4b7d92df71d8ed6cf53f182ce4ef9fb29636a86b14aa3852e5cbab11fd894e84bde12c6bb8e406258275ff2d0d875d0333dd67d91c9783d96bdefacb92c304cd
+  languageName: node
+  linkType: hard
+
 "react@npm:^18.3.1":
   version: 18.3.1
   resolution: "react@npm:18.3.1"
@@ -6605,6 +6633,15 @@ __metadata:
     react: ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
   checksum: c288012087424e7067bf4a48a3d50a7c0ea231188ecaaf17685d93711ef1846aedd37509dfc25c046052f671e7e19dd2de5d8b9c1e497a64c39995c9c338b40a
+  languageName: node
+  linkType: hard
+
+"recorder-js@npm:^1.0.7":
+  version: 1.0.7
+  resolution: "recorder-js@npm:1.0.7"
+  dependencies:
+    inline-worker: ^1.1.0
+  checksum: ff3bf71ee60a462065e808894894dbbee651bfb35a13e99a47f112e7e741f06467fa44620ff9be1f4d6d340aaf71a30303aceeb704c53a83ca76f9005f75d001
   languageName: node
   linkType: hard
 

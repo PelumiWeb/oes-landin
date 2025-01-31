@@ -18,13 +18,19 @@ export default {
       //   poppins: ['var(--font-poppins)', 'poppins'],
       //   inter: ['var(--font-inter)', 'inter'],
         marope: ['var(--font-marope)', 'marope'],
+        inter: ['var(--font-inter)', 'inter'],
+
     },
     backgroundImage: {
       'limit-image': "url('/limitsImages.svg')",
       'hero-Image': "url('/heroGradient.svg')",
       'wavy-circle': "url('/circleRipple.svg')",
       'gradient-bg': "url('/Gradient.svg')",
-      'footer-bg': "url('/Footer.svg')"
+      'footer-bg': "url('/Footer.svg')",
+      'text-gradient': "linear-gradient(90deg, #017F36 62.11%, #000000 62.11%)",
+
+      // background: linear-gradient(90deg, #017F36 62.11%, #000000 62.11%);
+
 
 
 
@@ -37,6 +43,7 @@ export default {
       'study-card': "10px 25px 100px 0px #002B6B40",
       "shadow-success": "0px 16px 40px 0px #391DE814",
       'input-shadow': "8px 8px 56px 0px #0000000D",
+
 
     },
   },
