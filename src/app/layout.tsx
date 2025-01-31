@@ -55,8 +55,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${marope.variable} ${inter.variable} ${generalSans.variable} antialiased`}>
         {/* <Header /> */}
         {children}
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
-  )
+  );
 }

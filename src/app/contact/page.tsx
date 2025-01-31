@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../component/Header";
 import ConnectOES from "../component/ConnectOES";
+import Footer from "../component/Footer";
 
 type Props = {};
 
@@ -43,6 +44,7 @@ const page = (props: Props) => {
       </div>
 
       {/* <ConnectOES /> */}
+      <Footer />
     </div>
   );
 };
