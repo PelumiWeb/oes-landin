@@ -37,7 +37,7 @@ const page = (props: Props) => {
   };
 
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative w-full h-screen bg-white">
       <div className="w-full flex justify-center items-center my-8">
         <div className="relative w-[100px] h-[100px]">
           <Image
