@@ -35,11 +35,11 @@ const Header = (props: Props) => {
             Contact Us
           </p>
         </button>
-        <button onClick={() => router.push("https://training.hremsoft.com/")}>
+        {/* <button onClick={() => router.push("https://training.hremsoft.com/")}>
           <p className="text-[#272F3A] font-marope text-[16px] leading-[24px] font-semibold">
             Training
           </p>
-        </button>
+        </button> */}
       </div>
 
       <div className="hidden md:block">
