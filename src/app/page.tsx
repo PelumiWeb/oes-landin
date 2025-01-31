@@ -17,8 +17,8 @@ export default function Home() {
       <TrustedComponent />
       <ConnectOES />
       <LearningLimits />
-      <UserComment />
-      <Faq />
+      {/* <UserComment /> */}
+      {/* <Faq /> */}
     </div>
   );
 }

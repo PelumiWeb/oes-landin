@@ -5,14 +5,14 @@ type Props = {};
 
 const TrustedComponent = (props: Props) => {
   return (
-    <div className="h-[450px] bg-[#FAFAFA] py-[88px] px-32">
+    <div className="h-full lg:h-[450px] bg-[#FAFAFA] py-[88px] px-8 lg:px-32">
       <h3 className=" text-[#1E242C] text-center ">
         Trusted by incredible Organizations
       </h3>
       <p className="font-marope font-normal text-[16px] leading-[24px] text-center">
         We Proudly stand as the trusted choice of these esteemed organizations
       </p>
-      <div className="flex items-center justify-between h-[200px]">
+      <div className="flex items-center justify-center md:justify-between h-full lg:h-[200px] flex-wrap">
         <img src="/curencyLogo.svg" alt="" />
         <img src="/currencyLogo1.svg" alt="" />
         <img src="/currencyLogo2.svg" alt="" />

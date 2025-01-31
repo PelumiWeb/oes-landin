@@ -104,7 +104,7 @@ const Faq = (props: Props) => {
       </div>
 
       <div className="h-full lg:h-[390px] w-full bg-gradient-bg bg-cover bg-no-repeat my-16 rounded-[24px] shadow-shadow-success p-4  lg:p-8">
-        <div className="w-full  flex flex-col justify-center items-center">
+        <div className="w-full h-full flex flex-col justify-center items-center">
           <p className="font-marope font-medium text-[16px]  md:text-[30px] lg:text-[40px] leading-[20px] md:leading-[38px] lg:leading-[48px] text-center w-[70%]">
             Boost Your Academic Success: Join Our Newsletter for the Latest
             Updates
