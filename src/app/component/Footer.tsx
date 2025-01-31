@@ -18,7 +18,7 @@ const Paragraph = (props: { bold?: boolean; text: string }) => {
 
 const Footer = (props: Props) => {
   return (
-    <div className="h-full md:h-[400px] px-8  sm:px-16 md:px-32 py-8 sm:py-8 md:py-16 bg-[#FAFFFE] md:bg-footer-bg bg-bottom bg-no-repeat w-full">
+    <div className="h-full md:h-[400px] px-8  sm:px-16 md:px-32 py-8 sm:py-8 md:py-16 bg-[#FAFFFE]  w-full">
       <div className="flex items-center md:items-start justify-center md:justify-between flex-col md:flex-row">
         <div className="w-full">
           <div className="flex items-center">
@@ -72,7 +72,7 @@ const Footer = (props: Props) => {
         </div>
       </div>
       <div className="flex justify-between flex-col md:flex-row items-center my-8 md:my-0 w-full">
-        <p className="font-marope font-semibold text-[16px] leading-[24px] text-white ">
+        <p className="font-marope font-semibold text-[16px] leading-[24px] text-[#017F36] ">
           ©2024 OES All rights reserved
         </p>
         <div className="hidden md:flex items-center  my-4">
@@ -80,16 +80,16 @@ const Footer = (props: Props) => {
             <Image src={"/footer1.svg"} alt="" fill />
           </div>
           <div className="relative w-[24px] h-[24px] mx-2">
-            <Image src={"/footer2.svg"} alt="" fill />
+            <Image src={"/mobileFooter.svg"} alt="" fill />
           </div>
           <div className="relative w-[24px] h-[24px] mx-2">
-            <Image src={"/footer3.svg"} alt="" fill />
+            <Image src={"/mobileFooter2.svg"} alt="" fill />
           </div>
           <div className="relative w-[24px] h-[24px] mx-2">
-            <Image src={"/footer4.svg"} alt="" fill />
+            <Image src={"/mobileFooter3.svg"} alt="" fill />
           </div>
           <div className="relative w-[24px] h-[24px] mx-2">
-            <Image src={"/footer5.svg"} alt="" fill />
+            <Image src={"/mobileFooter4.svg"} alt="" fill />
           </div>
         </div>
         <div className="flex items-center justify-center w-full md:hidden">

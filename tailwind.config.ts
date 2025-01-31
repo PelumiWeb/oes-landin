@@ -23,11 +23,16 @@ export default {
     },
     backgroundImage: {
       'limit-image': "url('/limitsImages.svg')",
+      'learning': "url('/learning.svg')",
+      'learning2': "url('/learning2.svg')",
+      'learning3': "url('/learngin3.svg')",
+      'learning4': "url('/learning4.svg')",
       'hero-Image': "url('/heroGradient.svg')",
       'wavy-circle': "url('/circleRipple.svg')",
       'gradient-bg': "url('/Gradient.svg')",
       'footer-bg': "url('/Footer.svg')",
       'text-gradient': "linear-gradient(90deg, #017F36 62.11%, #000000 62.11%)",
+      'learning-gradient': "linear-gradient(180deg, rgba(0, 0, 0, 0) 65%, #000000 100%)"
 
       // background: linear-gradient(90deg, #017F36 62.11%, #000000 62.11%);
 
