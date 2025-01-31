@@ -10,7 +10,7 @@ const Header = (props: Props) => {
   const router = useRouter();
   return (
     <div className="flex items-center  justify-between w-full md:px-16 md:py-8 px-2">
-      <div className="relative w-[100px] h-[100px]">
+      <div className="relative h-[60px] w-[60px] md:w-[100px] md:h-[100px]">
         <Image src={"/logosOES.svg"} fill alt="" />
       </div>
 
