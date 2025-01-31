@@ -7,7 +7,7 @@ import { TypeAnimation } from "react-type-animation";
 
 type Props = {};
 
-const page = (props: Props) => {
+const page1 = (props: Props) => {
   const [recorder, setRecorder] = useState<Recorder | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [buttonPressed, setPressed] = useState(false);
@@ -83,9 +83,9 @@ const page = (props: Props) => {
             <span className="bg-text-gradient bg-clip-text text-transparent w-full">
               OES AI
             </span>{" "}
-            what ever you need help with
+            <span className="text-[#000]" >what ever you need help with</span>
           </p>
-          <p className="font-inter text-[20px] leading-[24px] after:text-center text-[#767676] text-center mt-4">
+          <p className="font-inter text-[20px] leading-[24px] after:text-center text-[#000000] text-center mt-4">
             Sub text for OES
           </p>
         </div>
@@ -127,4 +127,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default page1;
