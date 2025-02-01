@@ -19,10 +19,10 @@ const ButtonCard = (props: ComponentProps) => {
         </div>
       </div>
       <div className="">
-        <p className="font-marope font-bold text-[14px] md:text-[20px] leading-[20px] lg:leading-[30px] text-center text-[#1E242C]">
+        <p className="font-marope font-bold text-[12px] md:text-[20px] leading-[15px] lg:leading-[30px] text-center text-[#1E242C]">
           {props.headerText}
         </p>
-        <p className="font-normal text-[12px] leading-[12px] md:leading-[18px] text-center text-[#1E242C]">
+        <p className="font-normal text-[8px] leading-[10px] md:leading-[18px] text-center text-[#1E242C]">
           {props.text}
         </p>
       </div>
@@ -50,11 +50,11 @@ const Card = (props: ComponentProps) => {
       </div>
 
       <div className="ml-2">
-        <p className=" font-bold text-[12px] md:text-[20px] leading-[20px] md:leading-[30px] text-[#1E242C]">
+        <p className=" font-bold text-[10px] md:text-[20px] leading-[10px] md:leading-[30px] text-[#1E242C]">
           {props.headerText}
         </p>
         {props?.text && (
-          <p className="font-normal text-[12px] font-marope leading-[13px] md:leading-[18px] text-[#414D60]">
+          <p className="font-normal text-[8px] font-marope leading-[10px] md:leading-[18px] text-[#414D60]">
             {props.text}
           </p>
         )}

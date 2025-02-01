@@ -12,7 +12,7 @@ import Footer from "./component/Footer";
 
 export default function Home() {
   return (
-    <div className="">
+    <div className="bg-white h-full w-full">
       <Hero />
       <Study />
       <TrustedComponent />
