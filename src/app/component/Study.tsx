@@ -12,7 +12,7 @@ type ComponentProps = {
 
 const ButtonCard = (props: ComponentProps) => {
   return (
-    <div className="w-[150px]  md:w-[260px] h-full md:h-[208px] rounded-[20px]  shadow-study-card flex flex-col justify-around items-center px-4 bg-white">
+    <div className="w-[150px]  md:w-[260px] h-full md:h-[208px] rounded-[20px]  shadow-study-card flex flex-col justify-around items-center p-4 bg-white">
       <div className="w-full flex items-center justify-center">
         <div className="relative w-[24px] md:w-[48px] h-[24px] md:h-[48px]">
           <Image src={props.image} alt="" fill />
@@ -32,9 +32,10 @@ const ButtonCard = (props: ComponentProps) => {
         borderColor="border-[#028036]"
         backgrounColor="bg-[#028036]"
         radius="rounded-[100px]"
-        width="w-[100px] md:w-full"
+        width="w-full"
         height="h-[15px] md:h-[35px]"
-        textStyle="text-[8px] md:text-[12px] font-marope leading-[10px] md:leading-[18px] text-white text-center w-full "
+        textStyle="text-[6px] md:text-[12px] font-marope leading-[10px] md:leading-[18px] text-white text-center w-full "
+        padding="p-1"
       />
     </div>
   );
