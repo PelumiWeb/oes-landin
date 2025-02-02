@@ -52,7 +52,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${marope.variable} ${inter.variable} ${generalSans.variable} antialiased`}>
+        className={`${geistSans.variable} ${geistMono.variable} ${marope.variable} ${inter.variable} ${generalSans.variable} antialiased bg-white`}>
         {/* <Header /> */}
         {children}
         {/* <Footer /> */}
