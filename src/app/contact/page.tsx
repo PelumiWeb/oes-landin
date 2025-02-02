@@ -7,7 +7,7 @@ type Props = {};
 
 const page = (props: Props) => {
   return (
-    <div>
+    <div className="w-full h-full bg-white">
       <Header />
       <div className="h-screen px-16 py-4">
         <div className="my-8">
