@@ -9,7 +9,7 @@ type Props = {};
 const Header = (props: Props) => {
   const router = useRouter();
   return (
-    <div className="bg-white flex items-center  justify-between w-full md:px-16 md:py-8 px-2">
+    <div className="bg-transparent flex items-center  justify-between w-full md:px-16 md:py-8 px-2">
       <div className="relative h-[60px] w-[60px] md:w-[100px] md:h-[100px]">
         <Image src={"/logosOES.svg"} fill alt="" />
       </div>

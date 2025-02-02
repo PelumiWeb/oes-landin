@@ -1,338 +1,420 @@
-"use client"; // This line tells Next.js to treat this file as a client-side component
+"use client";
 
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Cookies from "js-cookie";
-import Header from "../component/Header";
+import { FaMicrophone, FaStop, FaCamera } from "react-icons/fa";
 
-const Page = () => {
+interface Message {
+  text: string;
+  sender: "user" | "advisor";
+}
+
+const getCsrfToken = (): string | undefined => {
+  const token = Cookies.get("csrftoken");
+  console.log("CSRF Token:", token); // Debugging
+  return token;
+};
+
+const Page: React.FC = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [audioBlob, setAudioBlob] = useState(null);
-  const [messages, setMessages] = useState([]);
-  const [imagePreview, setImagePreview] = useState("");
-  const mediaRecorderRef = useRef(null);
-  const audioPlaybackRef = useRef(null);
-  const chatInputRef = useRef(null);
-  const imageInputRef = useRef(null);
-  const videoRef = useRef(null);
+  const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [imagePreview, setImagePreview] = useState<string | undefined>(
+    undefined
+  );
+  const [error, setError] = useState<string>("");
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const audioPlaybackRef = useRef<HTMLAudioElement | null>(null);
+  const chatInputRef = useRef<HTMLInputElement | null>(null);
+  const imageInputRef = useRef<HTMLInputElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isCameraActive, setIsCameraActive] = useState(false);
+  const [isPictureTaken, setIsPictureTaken] = useState(false);
 
-  const getCsrfToken = () => {
-    return Cookies.get("csrftoken");
+  const handleSendTextMessage = async () => {
+    const userMessage = chatInputRef.current?.value?.trim();
+    if (!userMessage) return;
+
+    setMessages((prev) => [...prev, { text: userMessage, sender: "user" }]);
+    chatInputRef.current!.value = "";
+
+    try {
+      const response = await fetch("http://localhost:8000/datingai/chat/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": getCsrfToken() || "",
+        },
+        body: JSON.stringify({ message: userMessage }),
+      });
+      const data = await response.json();
+      setMessages((prev) => [
+        ...prev,
+        { text: data.response, sender: "advisor" },
+      ]);
+    } catch (err) {
+      console.error("Error sending text message:", err);
+    }
   };
 
-  // const handleSendTextMessage = () => {
-  //   const userMessage = chatInputRef.current.value;
-  //   if (userMessage.trim()) {
-  //     setMessages((prevMessages) => [
-  //       ...prevMessages,
-  //       { text: userMessage, sender: "user" },
-  //     ]);
-  //     chatInputRef.current.value = "";
+  const handleStartRecording = async () => {
+    if (isRecording) return;
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mediaRecorder = new MediaRecorder(stream);
+      mediaRecorder.start();
+      mediaRecorderRef.current = mediaRecorder;
+      setIsRecording(true);
 
-  //     // Send the message to the server
-  //     fetch("http://localhost:8000/datingai/chat/", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         "X-CSRFToken": getCsrfToken(),
-  //       },
-  //       body: JSON.stringify({ message: userMessage }),
-  //     })
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         setMessages((prevMessages: any) => [
-  //           ...prevMessages,
-  //           { text: data.response, sender: "advisor" },
-  //         ]);
-  //       })
-  //       .catch((error) => console.error("Error sending text message:", error));
-  //   }
-  // };
+      const audioChunks: Blob[] = [];
+      mediaRecorder.ondataavailable = (event) => audioChunks.push(event.data);
 
-  // const handleStartRecording = () => {
-  //   if (isRecording) return;
+      mediaRecorder.onstop = async () => {
+        const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
+        setAudioBlob(audioBlob);
 
-  //   navigator.mediaDevices
-  //     .getUserMedia({ audio: true })
-  //     .then((stream) => {
-  //       const mediaRecorder = new MediaRecorder(stream);
-  //       mediaRecorder.start();
-  //       mediaRecorderRef.current = mediaRecorder;
+        if (audioPlaybackRef.current) {
+          audioPlaybackRef.current.src = URL.createObjectURL(audioBlob);
+        }
 
-  //       const audioChunks = [];
-  //       mediaRecorder.ondataavailable = (event) => {
-  //         audioChunks.push(event.data);
-  //       };
+        const formData = new FormData();
+        formData.append("audio", audioBlob);
 
-  //       mediaRecorder.onstop = () => {
-  //         const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
-  //         setAudioBlob(audioBlob);
-  //         const audioUrl = URL.createObjectURL(audioBlob);
-  //         audioPlaybackRef.current.src = audioUrl;
-
-  //         // Send audio to server
-  //         const formData = new FormData();
-  //         formData.append("audio", audioBlob);
-
-  //         const csrfToken = getCsrfToken();
-  //         if (csrfToken) {
-  //           fetch("http://localhost:8000/datingai/voicechat/", {
-  //             method: "POST",
-  //             headers: {
-  //               "X-CSRFToken": csrfToken,
-  //             },
-  //             body: formData,
-  //           })
-  //             .then((response) => response.json())
-  //             .then((data) => {
-  //               setMessages((prevMessages) => [
-  //                 ...prevMessages,
-  //                 { text: data.message, sender: "user" },
-  //                 { text: data.response, sender: "advisor" },
-  //               ]);
-  //             })
-  //             .catch((error) => console.error("Error sending audio:", error));
-  //         }
-  //       };
-
-  //       setIsRecording(true);
-  //     })
-  //     .catch((err) => console.error("Error accessing microphone:", err));
-  // };
+        try {
+          const response = await fetch(
+            "http://localhost:8000/datingai/voicechat/",
+            {
+              method: "POST",
+              headers: { "X-CSRFToken": getCsrfToken() || "" },
+              body: formData,
+            }
+          );
+          const data = await response.json();
+          setMessages((prev) => [
+            ...prev,
+            { text: data.message, sender: "user" },
+            { text: data.response, sender: "advisor" },
+          ]);
+        } catch (err) {
+          console.error("Error sending audio:", err);
+        }
+      };
+    } catch (err) {
+      console.error("Error accessing microphone:", err);
+      setError("Unable to access microphone");
+    }
+  };
 
   // const handleStopRecording = () => {
-  //   if (mediaRecorderRef.current) {
-  //     mediaRecorderRef.current.stop();
-  //   }
+  //   mediaRecorderRef.current?.stop();
   //   setIsRecording(false);
+  //   mediaRecorderRef.current?.stream
+  //     .getTracks()
+  //     .forEach((track) => track.stop());
   // };
 
-  // const handlePlayAudio = () => {
-  //   if (audioPlaybackRef.current) {
-  //     audioPlaybackRef.current.play();
-  //     setIsPlaying(true);
-  //   }
-  // };
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
 
-  // const handlePauseAudio = () => {
-  //   if (audioPlaybackRef.current) {
-  //     audioPlaybackRef.current.pause();
-  //     setIsPlaying(false);
-  //   }
-  // };
+    setImagePreview(URL.createObjectURL(file));
+    const formData = new FormData();
+    formData.append("image", file);
 
-  // const handleStopAudio = () => {
-  //   if (audioPlaybackRef.current) {
-  //     audioPlaybackRef.current.pause();
-  //     audioPlaybackRef.current.currentTime = 0;
-  //     setIsPlaying(false);
-  //   }
-  // };
+    try {
+      const response = await fetch(
+        "http://localhost:8000/datingai/upload-image/",
+        {
+          method: "POST",
+          headers: { "X-CSRFToken": getCsrfToken() || "" },
+          body: formData,
+        }
+      );
+      const data = await response.json();
+      setMessages((prev) => [
+        ...prev,
+        { text: "Image uploaded", sender: "user" },
+        { text: data.response, sender: "advisor" },
+      ]);
+    } catch (err) {
+      console.error("Error uploading image:", err);
+    }
+  };
 
-  // const handleImageUpload = (e: any) => {
-  //   const file = e.target.files[0];
-  //   if (file) {
-  //     setImagePreview(URL.createObjectURL(file));
+  const startCamera = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+      setIsCameraActive(true);
+    } catch (err) {
+      console.error("Error accessing camera:", err);
+      setError("Unable to access camera");
+    }
+  };
 
-  //     const formData = new FormData();
-  //     formData.append("image", file);
+  const stopCamera = () => {
+    if (videoRef.current && videoRef.current.srcObject) {
+      const stream = videoRef.current.srcObject as MediaStream;
+      stream.getTracks().forEach((track) => track.stop());
+    }
+    setIsCameraActive(false);
+  };
 
-  //     const csrfToken = getCsrfToken();
-  //     if (csrfToken) {
-  //       fetch("http://localhost:8000/datingai/upload-image/", {
-  //         method: "POST",
-  //         headers: {
-  //           "X-CSRFToken": csrfToken,
-  //         },
-  //         body: formData,
-  //       })
-  //         .then((response) => response.json())
-  //         .then((data) => {
-  //           setMessages((prevMessages) => [
-  //             ...prevMessages,
-  //             { text: "Image uploaded", sender: "user" },
-  //             { text: data.response, sender: "advisor" },
-  //           ]);
-  //         })
-  //         .catch((error) => console.error("Error uploading image:", error));
-  //     }
-  //   }
-  // };
+  const handleStopRecording = () => {
+    if (mediaRecorderRef.current) {
+      mediaRecorderRef.current.stop();
+    }
+    setIsRecording(false);
+    if (mediaRecorderRef.current?.stream) {
+      mediaRecorderRef.current.stream
+        .getTracks()
+        .forEach((track) => track.stop());
+    }
+  };
 
-  // const handleTakePicture = () => {
-  //   if (videoRef.current) {
-  //     const canvas = document.createElement("canvas");
+  const dataURLtoBlob = (dataURL: string): Blob | null => {
+    try {
+      const arr = dataURL.split(",");
+      const mimeMatch = arr[0].match(/:(.*?);/);
+      if (!mimeMatch) return null;
 
-  //     canvas.width = videoRef.current.videoWidth;
-  //     canvas.height = videoRef.current.videoHeight;
-  //     canvas.getContext("2d").drawImage(videoRef.current, 0, 0);
+      const mime = mimeMatch[1];
+      const bstr = atob(arr[1]);
+      let n = bstr.length;
+      const u8arr = new Uint8Array(n);
 
-  //     const image = canvas.toDataURL("image/png");
-  //     setImagePreview(image);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
 
-  //     const formData = new FormData();
-  //     formData.append("image", dataURLtoBlob(image));
+      return new Blob([u8arr], { type: mime });
+    } catch (error) {
+      console.error("Error converting data URL to Blob:", error);
+      return null;
+    }
+  };
 
-  //     const csrfToken = getCsrfToken();
-  //     if (csrfToken) {
-  //       fetch("http://localhost:8000/datingai/upload-image/", {
-  //         method: "POST",
-  //         headers: {
-  //           "X-CSRFToken": csrfToken,
-  //         },
-  //         body: formData,
-  //       })
-  //         .then((response) => response.json())
-  //         .then((data) => {
-  //           setMessages((prevMessages) => [
-  //             ...prevMessages,
-  //             { text: "Picture taken and uploaded", sender: "user" },
-  //             { text: data.response, sender: "advisor" },
-  //           ]);
-  //         })
-  //         .catch((error) => console.error("Error uploading picture:", error));
-  //     }
-  //   }
-  // };
+  const handleTakePicture = () => {
+    if (!videoRef.current) return;
 
-  // const startCamera = () => {
-  //   navigator.mediaDevices
-  //     .getUserMedia({ video: true })
-  //     .then((stream) => {
-  //       videoRef.current.srcObject = stream;
-  //       setIsCameraActive(true);
-  //     })
-  //     .catch((err) => console.error("Error accessing camera:", err));
-  // };
+    const videoElement = videoRef.current;
+    const canvas = document.createElement("canvas");
 
-  // const stopCamera = () => {
-  //   const stream = videoRef.current.srcObject;
-  //   const tracks = stream.getTracks();
+    canvas.width = videoElement.videoWidth;
+    canvas.height = videoElement.videoHeight;
 
-  //   tracks.forEach((track: any) => track.stop());
-  //   setIsCameraActive(false);
-  // };
+    const context = canvas.getContext("2d");
+    if (!context) {
+      console.error("Failed to get canvas context");
+      return;
+    }
 
-  // const dataURLtoBlob = (dataURL: any) => {
-  //   const byteString = atob(dataURL.split(",")[1]);
-  //   const arrayBuffer = new ArrayBuffer(byteString.length);
-  //   const uintArray = new Uint8Array(arrayBuffer);
+    context.drawImage(videoElement, 0, 0);
 
-  //   for (let i = 0; i < byteString.length; i++) {
-  //     uintArray[i] = byteString.charCodeAt(i);
-  //   }
+    const imageDataUrl: any = canvas.toDataURL("image/png");
+    setImagePreview(imageDataUrl);
 
-  //   return new Blob([arrayBuffer], { type: "image/png" });
-  // };
+    const imageBlob = dataURLtoBlob(imageDataUrl);
+    if (!imageBlob) {
+      console.error("Failed to convert image to Blob");
+      return;
+    }
 
-  // return (
-  //   <div className="flex flex-col items-center p-4 bg-white min-h-full overflow-scroll h-screen scroll-smooth overflow-y-auto no-scrollbar">
-  //     {/* <Header /> */}
-  //     {/* Logo space */}
-  //     {/* <div className="w-full flex justify-center py-4">
-  //       <div className="relative w-[100px] h-[100px]">
-  //         <Image
-  //           src={"/logosOES.svg"}
-  //           className="w-full h-full object-cover"
-  //           alt=""
-  //           fill
-  //         />
-  //       </div>
-  //     </div> */}
+    const formData = new FormData();
+    formData.append("image", imageBlob);
 
-  //     {/* Chat window */}
-  //     {/* <div className="bg-black text-white w-full max-w-2/3 rounded-lg shadow-lg flex flex-col overflow-scroll overflow-y-scroll min-h-[50vh] my-8">
-  //       <div className="p-4 overflow-y-auto flex-1" id="chat-box">
-  //         {messages.map((message, index) => (
-  //           <div
-  //             key={index}
-  //             className={`p-2 ${
-  //               message?.sender === "user" ? "text-left" : "text-right"
-  //             }`}>
-  //             <b>{message.sender === "user" ? "You" : "Advisor"}:</b>{" "}
-  //             {message.text}
-  //           </div>
-  //         ))}
-  //       </div>
-  //     </div> */}
+    const csrfToken = getCsrfToken();
+    if (!csrfToken) {
+      console.error("CSRF token not found");
+      return;
+    }
 
-  //     {/* Recorder Panel */}
-  //     {/* <div className="sticky w-full bottom-0 left-0 right-0 bg-gray-800 p-4 flex flex-col space-y-4 items-center">
-  //       <div className="w-full max-w-2/3 bg-gray-700 p-4 rounded-lg flex items-center space-x-4">
-  //         {imagePreview && <div className="w-[100px] h-[100px]">
-  //           <img src={imagePreview} alt="" className="object-contain w-full h-full" />
-  //         </div>}
-  //         <input
-  //           ref={chatInputRef}
-  //           type="text"
-  //           className="w-full p-2 rounded bg-gray-600 text-white"
-  //           placeholder="Type a message..."
-  //         />
-  //         <button
-  //           onClick={handleSendTextMessage}
-  //           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-400">
-  //           Send
-  //         </button>
-  //       </div>
+    fetch("http://localhost:8000/datingai/upload-image/", {
+      method: "POST",
+      headers: { "X-CSRFToken": csrfToken },
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { text: "Picture taken and uploaded", sender: "user" },
+          { text: data.response, sender: "advisor" },
+        ]);
+      })
+      .catch((error) => console.error("Error uploading picture:", error));
+  };
 
-  //       <div className="flex space-x-2">
-  //         <button
-  //           onClick={handleStartRecording}
-  //           className={`bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-500 ${
-  //             isRecording ? "hidden" : ""
-  //           }`}>
-  //           🎤
-  //         </button>
-  //         <button
-  //           onClick={handleStopRecording}
-  //           className={`bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500 ${
-  //             !isRecording ? "hidden" : ""
-  //           }`}>
-  //           Stop
-  //         </button>
-  //       </div>
+  // Handle playing the audio
+  const handlePlayAudio = () => {
+    if (!audioBlob || !audioPlaybackRef.current) return;
 
-  //       {/* Image Upload */}
-  //       {/* <div className="flex space-x-2">
-  //         <input
-  //           type="file"
-  //           ref={imageInputRef}
-  //           accept="image/*"
-  //           onChange={handleImageUpload}
-  //           className="hidden"
-  //         />
-  //         <button
-  //           onClick={() => imageInputRef.current.click()}
-  //           className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500">
-  //           Upload Image
-  //         </button>
+    const audioUrl = URL.createObjectURL(audioBlob);
+    const audioElement = audioPlaybackRef.current;
 
-  //         {/* Camera Start/Stop */}
-  //         <button
-  //           onClick={startCamera}
-  //           className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-500">
-  //           Start Camera
-  //         </button>
-  //         {isCameraActive && (
-  //           <button
-  //             onClick={handleTakePicture}
-  //             className="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-500">
-  //             Take Picture
-  //           </button>
-  //         )}
-  //       {/* </div> */}
-  //     {/* </div> */}
+    audioElement.src = audioUrl;
+    audioElement
+      .play()
+      .then(() => setIsPlaying(true))
+      .catch((error) => console.error("Error playing audio:", error));
+  };
 
-  //     {/* Hidden audio playback element
-  //     <audio ref={audioPlaybackRef} className="hidden" controls />
+  // Handle pausing the audio
+  const handlePauseAudio = () => {
+    if (audioPlaybackRef.current) {
+      audioPlaybackRef.current.pause();
+      setIsPlaying(false);
+    }
+  };
 
-  //     {/* Camera */}
-  //     {/* {isCameraActive && <video ref={videoRef} autoPlay className="hidden" />}  */}
-  //   </div>
-  // );
-  return <div></div>;
+  // Handle stopping the audio
+  const handleStopAudio = () => {
+    if (audioPlaybackRef.current) {
+      audioPlaybackRef.current.pause();
+      audioPlaybackRef.current.currentTime = 0;
+      setIsPlaying(false);
+    }
+  };
+
+  return (
+    <div className="flex flex-col items-center p-4 bg-white min-h-screen">
+      {/* Logo space */}
+      <div className="w-full flex justify-center py-4">
+        <div className="relative w-[100px] h-[100px]">
+          <Image src="/logosOES.svg" fill alt="Logo" />
+        </div>
+      </div>
+
+      {/* Chat window */}
+      <div className="bg-black text-white w-full max-w-2/3 rounded-lg shadow-lg flex flex-col h-[60vh]">
+        <div className="p-4 overflow-y-auto flex-1" id="chat-box">
+          <div className="mt-4">
+            {!isPictureTaken ? (
+              <video
+                ref={videoRef}
+                width="320"
+                height="240"
+                autoPlay
+                muted
+                className="border rounded-lg"></video>
+            ) : (
+              <img
+                src={imagePreview}
+                alt="Preview"
+                className="mt-4"
+                width="320"
+                height="240"
+              />
+            )}
+          </div>
+
+          {messages.map((message, index) => (
+            <div
+              key={index}
+              className={`p-2 ${
+                message.sender === "user" ? "text-left" : "text-right"
+              }`}>
+              <div>{message.text}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex p-4">
+          <input
+            ref={chatInputRef}
+            className="flex-1 p-2 rounded-l-lg text-black"
+            placeholder="Type your message..."
+          />
+          <button
+            onClick={handleSendTextMessage}
+            className="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-400">
+            Send
+          </button>
+        </div>
+      </div>
+
+      {/* Audio Controls */}
+      {audioBlob && (
+        <div className="flex space-x-2 mt-4">
+          <button
+            onClick={handlePlayAudio}
+            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-400">
+            Play
+          </button>
+          <button
+            onClick={handlePauseAudio}
+            className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-400">
+            Pause
+          </button>
+          <button
+            onClick={handleStopAudio}
+            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-400">
+            Stop
+          </button>
+        </div>
+      )}
+
+      {/* Error message */}
+      {error && <div className="text-red-500 mt-2">{error}</div>}
+
+      {/* Camera controls */}
+      <div className="mt-4">
+        {!isCameraActive && (
+          <button
+            onClick={startCamera}
+            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-500">
+            Start Camera
+          </button>
+        )}
+        {isCameraActive && !isPictureTaken && (
+          <button
+            onClick={stopCamera}
+            className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500">
+            Stop Camera
+          </button>
+        )}
+      </div>
+
+      {/* Audio Recorder */}
+      <div className="mt-4 flex space-x-4">
+        {isRecording ? (
+          <button
+            onClick={handleStopRecording}
+            className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500">
+            <FaStop />
+          </button>
+        ) : (
+          <button
+            onClick={handleStartRecording}
+            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-500">
+            <FaMicrophone />
+          </button>
+        )}
+      </div>
+
+      {/* File upload and take picture */}
+      <div className="mt-4 space-x-4">
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          ref={imageInputRef}
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-400"
+        />
+        {!isPictureTaken && (
+          <button
+            onClick={handleTakePicture}
+            className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-400">
+            <FaCamera /> Take Snap
+          </button>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default Page;
