@@ -281,7 +281,7 @@ const Page: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-4 bg-white min-h-screen">
+    <div className="flex flex-col items-center p-4 bg-white min-h-full">
       {/* Logo space */}
       <div className="w-full flex justify-center py-4 bg-transparent">
         <div className="relative w-[100px] h-[100px]">

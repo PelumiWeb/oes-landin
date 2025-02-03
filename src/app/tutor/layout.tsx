@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Manrope } from "next/font/google";
 import "../globals.css";
 
 import { Poppins, Montserrat } from "next/font/google";
+import Footer from "../component/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,6 +37,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${marope.variable} antialiased bg-white`}>
         {/* <Header /> */}
         {children}
+        <Footer />
       </body>
     </html>
   );
