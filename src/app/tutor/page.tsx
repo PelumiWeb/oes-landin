@@ -12,7 +12,7 @@ interface Message {
 
 const getCsrfToken = (): string | undefined => {
   const token = Cookies.get("csrftoken");
-  console.log("CSRF Token:", token); // Debugging
+  console.log("CSRF Token:", token, "Token"); // Debugging
   return token;
 };
 
