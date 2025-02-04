@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
 import CustomButton from "./CustomButton";
+import axios from "axios";
 
 type Props = {};
 type FaqComponentProps = {
@@ -64,7 +65,7 @@ const FaqComponent = (props: FaqComponentProps) => {
             animate={{ opacity: 1, y: 0 }} // Animate to visible & normal position
             exit={{ opacity: 0, y: 10 }} // Hide smoothly when removed
             transition={{ duration: 0.3 }} // 300ms animation
-            className="font-marope font-normal text-[12px] md:text-[14px] lg:text-[16px] leading-[24px]">
+            className="text-[#1E242C] font-marope font-normal text-[12px] md:text-[14px] lg:text-[16px] leading-[24px]">
             {props.text}
           </motion.p>
         )}
@@ -93,6 +94,37 @@ const FaqComponent = (props: FaqComponentProps) => {
 };
 
 const Faq = (props: Props) => {
+  const [email, setEmail] = React.useState("");
+  const [isLoading, setLoading] = React.useState(false);
+
+ const handleSubmit = async () => {
+   setLoading(true);
+
+   const formData = new FormData();
+   formData.append("passidno", email);
+  
+
+   const response = axios({
+     method: "post",
+     url: "https://applications.oes.com.ng/OESWebApp/addreception.do?",
+     data: formData,
+     headers: { "Content-Type": "multipart/form-data" },
+   })
+     .then(function (response) {
+       //handle success
+       console.log(response);
+      //  requestSuccesfull();
+       setLoading(false);
+     })
+     .catch(function (response) {
+       //handle error
+       console.log(response);
+      //  requestFailed();
+
+       setLoading(false);
+     });
+ };
+  
   return (
     <div className="px-8 lg:px-32  py-4 lg:py-16 bg-white">
       <h3 className="text-[#1E242C] my-4">Frequently asked Questions</h3>
@@ -120,18 +152,21 @@ const Faq = (props: Props) => {
                   <Image src={"/message.svg"} alt="" fill />
                 </div>
                 <input
+                  onChange={(e: any) => setEmail(e.target.value)}
                   type="text"
                   className="border-none outline-none w-[80%] h-full font-marope font-medium leading-[24px] ml-2"
                   placeholder="Your email address"
                 />
               </div>
               <CustomButton
+                onClick={handleSubmit}
                 title="Subscribe"
                 backgrounColor="bg-[#028036]"
                 radius="rounded-[100px]"
                 width="w-full md:w-[175px]"
                 height="h-[56px]"
                 textStyle="text-center text-white ml-8"
+                loading={isLoading}
               />
             </div>
           </div>

@@ -26,7 +26,7 @@ const UserComment = (props: Props) => {
   return (
     <div className="px-8 md:px-16 pt-4  md:py-8 lg:px-32 lg:py-16 bg-[#FAFAFA]">
       <h3 className="text-[#1E242C] py-4 text-center ">What our users say</h3>
-      <div className="flex items-start justify-center ">
+      <div className="flex items-center md:items-start justify-center flex-col md:flex-row">
         <div className="w-full lg:w-[600px] h-full lg:h-[400px] bg-[#1E242C] rounded-[20px] px-8 py-4">
           <div
             ref={scrollRef}
@@ -72,7 +72,7 @@ const UserComment = (props: Props) => {
             ))}
           </div>
         </div>
-        <div className="relative w-[500px] h-[400px]">
+        <div className="relative w-full md:w-[500px] h-[500px]  md:h-[400px] md:mt-0">
           <Image src={"/Video.svg"} className="object-contain" alt="" fill />
         </div>
       </div>

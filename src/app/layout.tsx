@@ -10,6 +10,7 @@ import "./globals.css";
 import Footer from "./component/Footer";
 import Header from "./component/Header";
 import { Poppins, Montserrat } from "next/font/google";
+import { ToastContainer } from "react-toastify";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -56,6 +57,7 @@ export default function RootLayout({
         {/* <Header /> */}
         {children}
         {/* <Footer /> */}
+        <ToastContainer />
       </body>
     </html>
   );
