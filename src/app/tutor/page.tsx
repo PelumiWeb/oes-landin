@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Cookies from "js-cookie";
 import { FaMicrophone, FaStop, FaCamera } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 interface Message {
   text: string;
@@ -24,6 +25,7 @@ const Page: React.FC = () => {
   const [imagePreview, setImagePreview] = useState<string | undefined>(
     undefined
   );
+  const router = useRouter()
   const [error, setError] = useState<string>("");
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioPlaybackRef = useRef<HTMLAudioElement | null>(null);
@@ -283,9 +285,18 @@ const Page: React.FC = () => {
   return (
     <div className="flex flex-col items-center p-4 bg-white min-h-full">
       {/* Logo space */}
-      <div className="w-full flex justify-center py-4 bg-transparent">
-        <div className="relative w-[100px] h-[100px]">
-          <Image src="/logosOES.svg" fill alt="Logo" />
+      <div className="flex flex-col items-start w-full justify-center">
+        <div className="w-[50%] flex justify-between items-center py-4 bg-transparent">
+          <button
+            onClick={() => router.push("/")}
+            className="flex  items-start">
+            <p className="text-[#272F3A] font-marope text-[16px] leading-[24px] font-semibold">
+              Home
+            </p>
+          </button>
+          <div className="relative w-[100px] h-[100px]">
+            <Image src="/logosOES.svg" fill alt="Logo" />
+          </div>
         </div>
       </div>
 
