@@ -59,8 +59,9 @@ const LearningLimits = (props: Props) => {
             text: "Be the private teacher, join us to provide personalize learning experience",
             header: "Lectures for any training school(s)",
           },
-        ].map((data) => (
+        ].map((data, index) => (
           <div
+            key={index}
             className={`w-[361px] h-[500px] ${data.image} bg-contain bg-no-repeat m-4 flex-shrink-0 relative`}>
             <div className="w-full h-full relative bg-learning-gradient">
               <div className="absolute bottom-4 px-4">

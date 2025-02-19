@@ -5,6 +5,7 @@ import Image from "next/image";
 import Cookies from "js-cookie";
 import { FaMicrophone, FaStop, FaCamera } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import Footer from "../component/Footer";
 
 interface Message {
   text: string;
@@ -25,7 +26,7 @@ const Page: React.FC = () => {
   const [imagePreview, setImagePreview] = useState<string | undefined>(
     undefined
   );
-  const router = useRouter()
+  const router = useRouter();
   const [error, setError] = useState<string>("");
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioPlaybackRef = useRef<HTMLAudioElement | null>(null);
@@ -288,9 +289,9 @@ const Page: React.FC = () => {
       <div className="flex flex-col items-start w-full justify-center">
         <div className="w-[50%] flex justify-between items-center py-4 bg-transparent">
           <button
-            onClick={() => router.push("/")}
-            className="flex  items-start">
-            <p className="text-[#272F3A] font-marope text-[16px] leading-[24px] font-semibold">
+            onClick={() => router.back()}
+            className="flex  items-start bg-[#028036] px-8 py-2 rounded-lg">
+            <p className=" font-marope text-[16px] leading-[24px] font-semibold text-white">
               Home
             </p>
           </button>
@@ -424,6 +425,7 @@ const Page: React.FC = () => {
           </button>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

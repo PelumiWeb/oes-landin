@@ -2,10 +2,12 @@ import Image from "next/image";
 import React from "react";
 import CustomButton from "./CustomButton";
 import Header from "./Header";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
 const Hero = (props: Props) => {
+  const router = useRouter();
   return (
     <div className="bg-white md:bg-hero-Image bg-cover bg-no-repeat w-full h-full">
       <Header />
@@ -29,6 +31,7 @@ const Hero = (props: Props) => {
             </p>
             <div className="mt-4 hidden md:block">
               <CustomButton
+                onClick={() => router.push("https://oes.com.ng/feature")}
                 padding="pl-4"
                 title="Explore Courses"
                 iconRight="/iconRightButtonHeader.svg"
@@ -45,8 +48,9 @@ const Hero = (props: Props) => {
           <div className="relative w-[500px] h-[500px]">
             <Image src={"/heroImage.svg"} alt="" fill />
           </div>
-          <div className="-mt-[5rem] flex w-full justify-center items-center md:hidden">
+          <div className="relative z-50 -mt-[5rem] flex w-full justify-center items-center md:hidden">
             <CustomButton
+              onClick={() => router.push("https://oes.com.ng/feature")}
               padding="pl-4"
               title="Explore Courses"
               iconRight="/iconRightButtonHeader.svg"

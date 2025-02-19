@@ -52,9 +52,8 @@ const Header = (props: Props) => {
           borderWidth="border"
           width="w-[187px]"
           height="h-[50px]"
-          onClick={() =>
-            router.push("https://applications.oes.com.ng/OESWebApp/")
-          }
+          
+          onClick={() => router.push("https://oes.com.ng/connectasastudent")}
           // backgrounColor="bg-red-500"
           textStyle="text-white text-center font-bold text-[16px] leading-[24px] font-manrope"
         />

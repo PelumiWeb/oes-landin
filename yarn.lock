@@ -3853,9 +3853,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^12.0.6":
-  version: 12.0.6
-  resolution: "framer-motion@npm:12.0.6"
+"framer-motion@npm:^12.4.2":
+  version: 12.4.2
+  resolution: "framer-motion@npm:12.4.2"
   dependencies:
     motion-dom: ^12.0.0
     motion-utils: ^12.0.0
@@ -3871,7 +3871,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: 6f73a4f10827c8149689bbc8f0c738a168896962915029e12f6c3cff9bb6b1de9b40314bdee3fce842f7de4dd3415f41a2c8c2e284f493f99099d1423e7e4fd5
+  checksum: 1b78075e249daa6e235496c5b86a3acca9d7dba054fc83f282e2e4248034e06c368f17af1b7cc502330b6b9b7ca69518fb1a26950bd2466296d6fc8e7910587e
   languageName: node
   linkType: hard
 
@@ -5418,7 +5418,7 @@ __metadata:
     dayjs: ^1.11.13
     eslint: ^9
     eslint-config-next: 15.1.6
-    framer-motion: ^12.0.6
+    framer-motion: ^12.4.2
     js-cookie: ^3.0.5
     negotiator: ^1.0.0
     next: 15.1.6
